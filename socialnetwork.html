@@ -74,6 +74,11 @@
 <script>
 
 var tabs=new tabsViewModel();
+tabs.addTab('home','active', new homeViewModel(),'homeTmpl');
+
+homeViewModel.prototype.openSearchTab=function(){
+   tabs.addTab('search','' ,new searchViewModel(),'searchTmpl');
+};
 searchViewModel.prototype.openPersonTab=function(data){
 
    var f=data.firstname;
@@ -81,11 +86,6 @@ searchViewModel.prototype.openPersonTab=function(data){
    var newPerson=new personViewModel(f,l);
    tabs.addTab(f+' '+l,'' ,newPerson,'personTmpl');
 };
-
-homeViewModel.prototype.openSearchTab=function(){
-   tabs.tabsArr.push(new tabViewModel('search','' ,new searchViewModel(),'searchTmpl'))
-};
-tabs.tabsArr.push(new tabViewModel('home','active', new homeViewModel(),'homeTmpl'));
 personViewModel.prototype.addFriend=function(){
    var homeVM=tabs.tabsArr()[0].model();
    homeVM.friends.push({name:this.firstname()})
