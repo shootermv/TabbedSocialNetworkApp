@@ -1,0 +1,63 @@
+/*clear fix*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
+
+
+
+/*tabs*/
+ul.tabs{    
+  list-style-type:none;
+  display:block;
+  height:23px;
+  margin:0px;
+  padding:0px;
+  
+}
+ul.tabs li{
+  display:block;
+  float:left;
+  border:red 1px solid;
+  padding:1px 7px; 
+  text-align:center;
+  border-bottom:none;
+  marign:0px;
+}  
+ul.tabs li.active{
+  background:#fff;
+  border-color:blue;
+  border-bottom:#fff 1px solid;
+}
+.content{
+  padding:5px;
+  width:400px;
+  border:red 1px solid;
+  
+}
+/* person */
+.person{
+  width:300px;
+}
+.person div{
+  width:150px;
+}
+.person img{
+  float:right;
+}
