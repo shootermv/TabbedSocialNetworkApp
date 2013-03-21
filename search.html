@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/axubun/3/edit
+-->
+<head>
+
+<meta name="description" content="here is some trying to create dynamic tabs" />
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<style>
+.results td{
+  color:blue;
+  cursor:pointer
+}
+</style>
+</head>
+<body>
+<script type="text/html" id="searchTmpl">
+   <div data-bind="text:typename"></div>
+     <input data-bind="value:searchterm"/>
+     <button class="o" data-bind="click:clickSearch">press</button>
+                
+     <table data-bind="foreach:results" class="results">
+          <tr>
+            <td data-bind="text:firstname,click:$parent.openPersonTab"></td>
+          </tr>
+       </table>      
+      </div>
+</script>
+<!--ko template: { name: 'searchTmpl', data: search }--><!--/ko-->
+   
+   
+<script src="js/lib/jquery-1.7.1.min.js"></script>
+<script src="js/lib/knockout-latest.js"></script>
+<script src="js/searchViewModel.js"></script>
+<script>
+
+var search=new searchViewModel();
+searchViewModel.prototype.openPersonTab=function(data){
+alert('adding tab')
+};
+ko.applyBindings();
+</script>
+</body>
+</html>

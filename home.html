@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/axubun/3/edit
+-->
+<head>
+
+<meta name="description" content="here is some trying to create dynamic tabs" />
+<meta charset=utf-8 />
+<title>JS Bin</title>
+</head>
+<body>
+<script type="text/html" id="homeTmpl">
+	 <h3>wellcome to Social Network!</h3> 
+     <strong>friends: </strong>
+	 <hr/>
+	 <ul data-bind="foreach:friends">
+	  <li data-bind="text:name"></li>
+	 </ul>
+	 <div>Wanna find more friends? <button data-bind="click:openSearchTab">click here</button></div>
+</script>
+<!--ko template: { name: 'homeTmpl' }--><!--/ko-->
+   
+
+<script src="js/lib/jquery-1.7.1.min.js"></script>
+<script src="js/lib/knockout-latest.js"></script>
+<script src="js/homeViewModel.js"></script>
+<script>
+homeViewModel.prototype.openSearchTab=function(){
+  alert('search will be opened')
+};
+ko.applyBindings(new homeViewModel());
+</script>
+</body>
+</html>

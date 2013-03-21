@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/axubun/3/edit
+-->
+<head>
+
+<meta name="description" content="here is some trying to create dynamic tabs" />
+
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<style>
+.person{
+  width:300px;
+}
+.person div{
+  width:150px;
+}
+.person img{
+  float:right;
+}
+</style>
+</head>
+<body>
+<script type="text/html" id="personTmpl">
+   <section class="person">
+    <img src="img/placeholder.png" alt="pic" />
+     <div>  
+	     <strong>first name:</strong> <label data-bind="text:firstname"></label>              
+     </div>
+     <div>  
+	     <strong>last name:</strong> <label data-bind="text:lastname"></label>              
+     </div>
+	<button data-bind="click:addFriend">add as friend</button>
+   </section>	 
+</script>
+<!--ko template: { name: 'personTmpl', data: person }--><!--/ko-->
+   
+<script src="js/lib/jquery-1.7.1.min.js"></script>
+<script src="js/lib/knockout-latest.js"></script>
+<script src="js/personViewModel.js"></script>
+
+<script>
+
+var person=new personViewModel();
+personViewModel.prototype.addFriend=function(){
+   alert('here will come some functionality')
+}
+ko.applyBindings();
+</script>
+</body>
+</html>
