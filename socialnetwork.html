@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/axubun/3/edit
+-->
+<head>
+<meta name="description" content="here is some trying to create dynamic tabs" />
+<script src="js/lib/jquery-1.7.1.min.js"></script>
+
+
+<script src="js/lib/knockout-latest.js"></script>
+<script src="js/homeViewModel.js"></script>
+<script src="js/searchViewModel.js"></script>
+<script src="js/personViewModel.js"></script>
+<meta charset=utf-8 />
+<title>tabs</title>
+<link href="css/css.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+ <script type="text/html" id="personTmpl">
+   <section class="person clearfix">
+    <img src="img/placeholder.png" alt="pic" />
+     <div>  
+	     <strong>first name:</strong> <label data-bind="text:firstname"></label>              
+     </div>
+     <div>  
+	     <strong>last name:</strong> <label data-bind="text:lastname"></label>              
+     </div>
+	<button data-bind="click:addFriend">add as friend</button>
+   </section>	 
+</script>
+<script type="text/html" id="searchTmpl">
+   <h3>Find some friends</h3>
+     <input data-bind="value:searchterm"/>
+     <button class="o" data-bind="click:clickSearch">press</button>
+                
+     <table data-bind="foreach:results" class="results">
+          <tr>
+            <td data-bind="text:firstname,click:$parent.openPersonTab"></td>
+          </tr>
+       </table>      
+      </div>
+</script>
+<script type="text/html" id="homeTmpl">
+	 <h3>wellcome to Social Network!</h3> 
+     <strong>friends: </strong>
+	 
+	 <ul data-bind="foreach:friends">
+	  <li data-bind="text:name"></li>
+	 </ul>
+	 <div>Wanna find more friends? <button data-bind="click:openSearchTab">click here</button></div>
+</script>
+<script type="text/html" id="tabLinkTmpl">
+    <li id="tab1" data-bind="attr:{class:active},text:title,click:$parent.makeTabActive"></li>
+</script>
+<script type="text/html" id="tabPanelTmpl">
+    <div class="content" tab="tab1" data-bind="visible: active()!='',template:{name: templName, data:model}">
+      
+    </div>
+</script>
+
+
+  <ul class="tabs">
+        <!--ko template: { name: 'tabLinkTmpl', foreach: tabsArr }--><!--/ko-->
+  </ul>
+  <div class="contentWrap" >
+       <!--ko template: { name: 'tabPanelTmpl', foreach: tabsArr }--><!--/ko-->
+  </div>
+
+  
+   
+<script src="js/tabsViewModel.js"></script>
+<script>
+
+var tabs=new tabsViewModel();
+searchViewModel.prototype.openPersonTab=function(data){
+
+   var f=data.firstname;
+   var l=data.lastname;
+   var newPerson=new personViewModel(f,l);
+   tabs.addTab(f+' '+l,'' ,newPerson,'personTmpl');
+};
+
+homeViewModel.prototype.openSearchTab=function(){
+   tabs.tabsArr.push(new tabViewModel('search','' ,new searchViewModel(),'searchTmpl'))
+};
+tabs.tabsArr.push(new tabViewModel('home','active', new homeViewModel(),'homeTmpl'));
+personViewModel.prototype.addFriend=function(){
+   var homeVM=tabs.tabsArr()[0].model();
+   homeVM.friends.push({name:this.firstname()})
+}
+
+ko.applyBindings(tabs);
+</script>
+</body>
+</html>
